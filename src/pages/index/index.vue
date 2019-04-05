@@ -1,34 +1,10 @@
 <template>
-  <div style="background-color: aqua">
-
-    <div class="userinfo" @click="bindViewTap">
-      <img class="userinfo-avatar" v-if="userInfo.avatarUrl" :src="userInfo.avatarUrl" background-size="cover" />
-      <img class="userinfo-avatar" src="/static/images/user.png" background-size="cover" />
-
-      <div class="userinfo-nickname">
-        <card :text="userInfo.nickName"></card>
-      </div>
+  <div class="beijing">
+    <div class="background-img">
+      <image  class="img" src="/static/images/beijing.jpg"></image>
     </div>
-
-    <div class="usermotto">
-      <div class="user-motto">
-        <card :text="motto"></card>
-      </div>
-    </div>
-
-    <form class="form-container">
-      <input type="text" class="form-control" :value="motto" placeholder="v-model" />
-      <input type="text" class="form-control" v-model="motto" placeholder="v-model" />
-      <input type="text" class="form-control" v-model.lazy="motto" placeholder="v-model.lazy" />
-    </form>
-
-    <a href="/pages/counter/main" class="counter">去往Vuex示例页面</a>
-
-    <div class="all">
-        <div class="left">
-        </div>
-        <div class="right">
-        </div>
+    <div >
+      <button class="button" @click="addChildren">添加孩子</button>
     </div>
   </div>
 </template>
@@ -38,23 +14,45 @@
 export default {
   data () {
     return {
-      motto: 'Hello miniprograme',
-      userInfo: {
-        nickName: 'mpvue',
-        avatarUrl: 'http://mpvue.com/assets/logo.png'
-      },
-      data: {}
-    }
-  },
-  created () {
-    console.log(this.$url.get_user)
-    this.$httpWX.post(this.$url.get_user, this.data).then(res => {
-      console.log(res)
-    })
-  }, methods: {
-    bindViewTap () {
-      console.log(111111111)
+      url : ''
+      }
+  },methods: {
+    addChildren () {
+      wx.navigateTo({
+        url: '/pages/user/main'　　// 页面 B
+      })
     }
   }
 }
 </script>
+<style scoped>
+  .beijing{
+    width: 100%;
+    height: 100%;
+    background-color:#A2DAD7;
+    position: fixed;
+  }
+
+  .userinfo-nickname {
+    color: #aaa;
+  }
+
+  .usermotto {
+    margin-top: 200px;
+  }
+  /* 背景图片 */
+  .background-img{
+    height: 150px;
+    width: 100%;
+    margin-top: 30%;
+  }
+  .img{
+    width: 50%;
+    height: 150px;
+    margin-left: 25%
+  }
+  .button{
+    width: 50%;
+    margin-top: 50%;
+  }
+</style>
