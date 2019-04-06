@@ -1,34 +1,37 @@
 <template>
   <div class=".beijing">
-    <group title="set is-type=china-name">
-      <x-input title="姓名" name="username" placeholder="请输入姓名" is-type="china-name"></x-input>
-    </group>
+    <van-cell-group>
+      <van-field
+        :value="model.name"
+        required
+        clearable
+        label="用户名"
+        icon="question-o"
+        placeholder="请输入用户名"
+        bind:click-icon="onClickIcon"
+      />
 
-    <group title="set keyboard=number and is-type=china-mobile">
-      <x-input title="手机号码" name="mobile" placeholder="请输入手机号码" keyboard="number" is-type="china-mobile"></x-input>
-    </group>
-
-    <group title="set is-type=email">
-      <x-input title="邮箱" name="email" placeholder="请输入邮箱地址" is-type="email"></x-input>
-    </group>
+      <van-field
+        :value="model.password"
+        type="password"
+        label="密码"
+        placeholder="请输入密码"
+        required
+        :border="false"></van-field>
+    </van-cell-group>
   </div>
 </template>
 
 <script>
-  import { XInput, Group, XButton, Cell } from 'vux'
+  // import { Field} from 'vant';
   export default {
     components: {
-      XInput,
-      XButton,
-      Group,
+      // Field,
     },
     data () {
       return {
-        url : ''
+        model : []
       }
-    },
-    created () {
-
     },
   }
 </script>

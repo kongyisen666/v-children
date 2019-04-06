@@ -19,7 +19,7 @@ export default {
   },methods: {
     addChildren () {
       wx.navigateTo({
-        url: '/pages/user/main'　　// 页面 B
+        url: '/pages/user/main'
       })
     }
   }

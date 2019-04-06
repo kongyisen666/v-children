@@ -1,9 +1,7 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
 import App from './App'
 import WXrequest from './utils/wx-request'
 import URL from './utils/url'
-Vue.use(Vuex) // 安装`Vuex`
 Vue.config.productionTip = false
 App.mpType = 'app'
 
