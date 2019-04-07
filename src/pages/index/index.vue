@@ -14,9 +14,9 @@
 export default {
   data () {
     return {
-      url : ''
-      }
-  },methods: {
+      url: ''}
+  },
+  methods: {
     addChildren () {
       wx.navigateTo({
         url: '/pages/user/main'
