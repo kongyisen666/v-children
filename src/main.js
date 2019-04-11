@@ -87,3 +87,28 @@ Vue.prototype.$alert = function (title, fn) {
     }
   })
 }
+
+Vue.prototype.$getToday = function () {
+    let myDate = new Date()
+    let myMonth = myDate.getMonth() + 1
+    if (myMonth < 10) {
+      myMonth = '0' + myMonth
+    }
+    let mydate = myDate.getDate()
+    if (myDate.getDate() < 10) {
+      mydate = '0' + myDate.getDate()
+    }
+    let today = myDate.getFullYear() + '-' + myMonth + '-' + mydate
+    return today
+}
+
+Vue.prototype.stringIsNull = function (text) {
+    if (undefined == text) {
+      return true;
+    }
+    if (text.length == "" || text.length == 0) {
+      return true;
+    }
+    return false;
+}
+

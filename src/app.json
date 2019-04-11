@@ -18,6 +18,7 @@
     "van-cell-group": "/static/vant/cell-group/index",
     "van-radio-group": "/static/vant/radio-group/index",
     "van-radio": "/static/vant/radio/index",
-    "checkbox-group": "/static/vant/checkbox-group/index"
+    "van-checkbox-group": "/static/vant/checkbox-group/index",
+    "van-datetime-picker": "/static/vant/checkbox-group/index"
   }
 }
