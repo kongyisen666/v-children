@@ -93,9 +93,10 @@
 
       <van-field
         v-model="children.password"
-        type="password"
+        type="digit"
         label="登陆密码"
-        placeholder="请输入登陆密码"
+        maxlength="4"
+        placeholder="请输入4位登陆密码"
         clickable
         @change="setPassword"
         required
@@ -159,9 +160,17 @@
           return ;
         }
         this.$post(this.$url.add_or_update_children, this.children).then(res => {
-          console.log(res.data)
           if (res.data.success) {
-            this.$alert('新增成功,请等待管理员审核,通过审核后可进入操作页面')
+            wx.showModal({
+              title: '操作完成，请等待管理员审核,通过审核后可进入操作页面',
+              success: function (res) {
+                if (res.confirm) {
+                  wx.redirectTo({
+                    url: '/pages/login/main'
+                  })
+                }
+              }
+            })
           } else {
             this.$alert(res.data.msg)
           }

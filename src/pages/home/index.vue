@@ -35,7 +35,7 @@
         })
       },
       getChildren () {
-        this.$post(this.$url.get_child, {}).then(res => {
+        this.$post(this.$url.get_children, {}).then(res => {
           this.children = res.data.object.object
           this.score = res.data.object.object.score
         })

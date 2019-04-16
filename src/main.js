@@ -12,13 +12,10 @@ Vue.prototype.$post = function (url, data) { // post请求
   wx.showLoading({
     title: '努力加载中'
   })
-  let header = {}
-  url === 'login/' // 通过传进来的url判断是否是登陆页
-    ? header = {}
-    : header = {
-      'content-type': 'application/json',
-      'cookie': wx.getStorageSync("sessionid")
-    }
+  let header = {
+    'content-type': 'application/json',
+    'cookie': wx.getStorageSync("sessionid")
+  }
   return new Promise((resolve, reject) => {
     wx.request({
       url: urlPath + url,
@@ -41,9 +38,9 @@ Vue.prototype.$post = function (url, data) { // post请求
             })
           } else if (res.data.code && res.data.code !== 200) { // 若返回coode码且不等于200表示传入参数有问题
             res.message = res.data.message, reject(res)
-          } else resolve(res)
-          // 存储cookie
-          res.data.success == true ? wx.setStorageSync("sessionid", res.header["Set-Cookie"]) : ""
+          } else{
+            resolve (res)
+          }
         } else {
           res.message = '服务器错误请求失败'
           reject(res)
