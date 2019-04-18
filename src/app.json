@@ -1,10 +1,10 @@
 {
   "pages": [
     "pages/login/main",
+    "pages/home/main",
     "pages/password/main",
     "pages/user/main",
-    "pages/index/main",
-    "pages/home/main"
+    "pages/index/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -20,6 +20,7 @@
     "van-radio-group": "/static/vant/radio-group/index",
     "van-radio": "/static/vant/radio/index",
     "van-checkbox-group": "/static/vant/checkbox-group/index",
-    "van-datetime-picker": "/static/vant/checkbox-group/index"
+    "van-datetime-picker": "/static/vant/checkbox-group/index",
+    "van-popup": "/static/vant/popup/index"
   }
 }
