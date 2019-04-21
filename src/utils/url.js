@@ -7,6 +7,7 @@ var URL = {
   add_score: 'children/add_score',
   login_home: 'login/home',
   reward_punish_search_by_type: 'reward_punish/search_by_type',
+  score_log_search_by_children_id: 'score_log/search_by_children_id'
 }
 
 export default {

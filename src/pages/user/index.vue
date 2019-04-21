@@ -13,11 +13,11 @@
       />
 
       <van-radio-group v-model="children.sex">
-        <van-cell title="性别:男" clickable @click="children.sex = '男'">
-          <van-radio name="男" />
+        <van-cell title="性别:男" clickable @click="children.sex = '0'">
+          <van-radio name="0"/>
         </van-cell>
-        <van-cell title="性别:女" clickable @click="children.sex = '女'">
-          <van-radio name="女" />
+        <van-cell title="性别:女" clickable @click="children.sex = '1'">
+          <van-radio name="1"/>
         </van-cell>
       </van-radio-group>
 
@@ -111,7 +111,7 @@
   var children = {
     name: '',
     age: '',
-    sex: '男',
+    sex: '0',
     phone: '',
     password: '',
     birthday: '',
@@ -137,27 +137,31 @@
       submit () {
         if (this.stringIsNull(this.children.name)) {
           this.$alert('孩子姓名不能为空')
-          return ;
+          return
         }
         if (this.stringIsNull(this.children.age)) {
           this.$alert('孩子年龄')
-          return ;
+          return
         }
         if (this.stringIsNull(this.children.birthday)) {
           this.$alert('孩子出生日期')
-          return ;
+          return
         }
         if (this.stringIsNull(this.children.grade)) {
           this.$alert('孩子年级')
-          return ;
+          return
         }
         if (this.stringIsNull(this.children.phone)) {
           this.$alert('联系电话')
-          return ;
+          return
         }
         if (this.stringIsNull(this.children.password)) {
           this.$alert('登陆密码')
-          return ;
+          return
+        }
+        if (this.children.password.length != 4) {
+          this.$alert('请输入4位登陆密码')
+          return
         }
         this.$post(this.$url.add_or_update_children, this.children).then(res => {
           if (res.data.success) {
@@ -180,6 +184,7 @@
         this.$post(this.$url.get_children, {}).then(res => {
           if (res.data.success) {
             this.children = res.data.object.object
+            this.children.sex = this.children.sex + ''
           }
         })
       },
@@ -217,10 +222,10 @@
   }
 </script>
 <style>
-  .beijing{
+  .beijing {
     width: 100%;
     height: 100%;
-    background-color:#A2DAD7;
+    background-color: #A2DAD7;
     position: fixed;
   }
 </style>

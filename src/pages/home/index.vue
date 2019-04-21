@@ -4,7 +4,12 @@
       <div style="border-radius: 0 100px 100px 0;height: 2.5rem;width:6.5rem;background-color: #D7F1EE;float: left;">
         <span
           style="margin-left: 10%;color: #3B6929;line-height: 2.5rem;text-align: center;height: 2rem;"> {{score}}分</span>
-          <img style="margin-top: 2%;border-radius: 100px 100px 100px 100px;width: 2rem;height: 2rem;float: right;margin-right: 5%;margin-top: 4%" src="/static/images/richang.png" >
+        <img v-if="children.sex==0"
+          style="margin-top: 2%;border-radius: 100px 100px 100px 100px;width: 2rem;height: 2rem;float: right;margin-right: 5%;margin-top: 4%"
+          src="/static/images/nan.jpg">
+        <img v-if="children.sex==1"
+             style="margin-top: 2%;border-radius: 100px 100px 100px 100px;width: 2rem;height: 2rem;float: right;margin-right: 5%;margin-top: 4%"
+             src="/static/images/nv.jpg">
       </div>
       <div
         style="font-size:1.2rem;line-height: 2rem;line-height: 2.5rem;text-align: center;height: 2.5rem;width:5rem;background-color:#4EA2C4;float: right;color: white">
@@ -37,8 +42,39 @@
           </span>
         </div>
       </van-popup>
+      <div><img src="/static/images/shuihu.jpg"
+                style="width: 6rem;margin-top:-20%;height: 6rem;float: right;margin-right: 25%"></div>
+      <div style="clear:both"/>
+      <div style="position:relative;float:right;margin-right: 50%;margin-top:-5%;text-align:center;">
+        <img src="/static/images/shuidi.jpg" style="width: 1.2rem;height: 2rem">
+        <span
+          style="position: absolute; top:0.7rem; left: 0rem;font-weight:500;font-size: 0.9rem;color: darkslategrey">{{shui1}}</span>
+      </div>
+      <div style="clear:both"/>
+      <div style="position:relative;float:right;margin-right: 55%;text-align:center">
+        <img src="/static/images/shuidi.jpg" style="width: 1.2rem;height: 2rem">
+        <span
+          style="position: absolute; top:0.7rem; left: 0rem;font-weight:500;font-size: 0.9rem;color: darkslategrey">{{shui2}}</span>
+      </div>
+      <div style="clear:both"/>
+      <div style="position:relative;float:right;margin-right: 49%;text-align:center">
+        <img src="/static/images/shuidi.jpg" style="width: 1.2rem;height: 2rem">
+        <span
+          style="position: absolute; top:0.7rem; left: 0rem;font-weight:500;font-size: 0.9rem;color: darkslategrey">{{shui3}}</span>
+      </div>
+      <div style="clear:both"/>
+      <div style="position:relative;float:right;text-align:center;margin-right: 15%">
+        <img src="/static/images/shu.jpg" style="width: 9rem;height: 6rem;">
+        <img @click="luckDraw" src="/static/images/choujiang.jpg" style="width: 3rem;height: 3rem;">
+      </div>
     </div>
-
+    <div style="border-radius: 1rem 1rem 0 0;position:fixed;bottom:0;height: 15%;width: 100%;background-color: #d2eced">
+      <div style="margin-left: 3%;margin-top: 1.5%">积分动态</div>
+      <div style="margin-top: 1.5%;background-color: white;width: 90%;height: 50%;margin-left: 5%;">
+        <img src="/static/images/shuidi1.jpg" style="margin-left: 3%;width: 2.3rem;height: 2.3rem;float: left;">
+        <div style="float: left;margin-left: 4%;line-height: 2.5rem;height: 2.5rem">{{logMsg}}</div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -49,10 +85,16 @@
         children: {},
         score: 0,
         show: false,
+        scoreLog: {},
+        newScoreLog: [],
+        logMsg: '暂无数据',
+        shui1: '',
+        shui2: '',
+        shui3: '',
         rewardPunish: {},
         rewardPunish0: {},
         rewardPunish1: {},
-        rewardPunish2: {},
+        rewardPunish2: {}
       }
     },
     mounted () {
@@ -65,7 +107,6 @@
     },
     methods: {
       showOrClose (type) {
-        console.log(type)
         if (0 == type) {
           this.rewardPunish = this.rewardPunish0
         }
@@ -75,9 +116,6 @@
         if (2 == type) {
           this.rewardPunish = this.rewardPunish2
         }
-        console.log(this.rewardPunish0)
-        console.log(this.rewardPunish1)
-        console.log(this.rewardPunish2)
         if (this.show) {
           this.show = false
         }
@@ -86,6 +124,8 @@
       addScore (score, msg) {
         this.$post(this.$url.add_score, {childrenId: this.children.id, msg: msg, score: score}).then(res => {
           if (res.data.success === true) {
+            this.addNewScoreLog(res.data.object.object)
+            this.updateScoreLog(score)
             this.score = this.score + score
           }
           this.$alert(res.data.msg)
@@ -94,6 +134,7 @@
       getChildren () {
         this.$post(this.$url.get_children, {}).then(res => {
           this.children = res.data.object.object
+          this.searchScoreLog()
           this.score = res.data.object.object.score
         })
       },
@@ -114,6 +155,38 @@
             this.$alert(res.data.msg)
           }
         })
+      },
+      searchScoreLog () {
+        this.$post(this.$url.score_log_search_by_children_id, {
+          childrenId: this.children.id,
+          maxRows: '10'
+        }).then(res => {
+          if (res.data.success) {
+            this.scoreLog = res.data.object.object
+            if (this.scoreLog.length > 0) {
+              this.logMsg = this.scoreLog[0].msg + '+' + this.scoreLog[0].score
+            }
+            this.shui1 = '+' + this.scoreLog[0].score
+            this.shui2 = '+' + this.scoreLog[1].score
+            this.shui3 = '+' + this.scoreLog[2].score
+          }
+        })
+      },
+      updateScoreLog (score) {
+        this.shui3 = this.shui2
+        this.shui2 = this.shui1
+        this.shui1 = '+' + score
+        if (this.newScoreLog.length > 0) {
+          this.logMsg = this.newScoreLog[this.newScoreLog.length - 1].msg + '+' + this.newScoreLog[this.newScoreLog.length - 1].score
+        } else if (this.scoreLog.length > 0) {
+          this.logMsg = this.scoreLog[0].msg + '+' + this.scoreLog[0].score
+        }
+      },
+      addNewScoreLog (object) {
+        this.newScoreLog.push(object)
+      },
+      luckDraw () {
+        this.$alert('该功能暂未上线尽情期待')
       }
     }
   }
