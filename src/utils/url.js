@@ -1,4 +1,4 @@
-var URLCommonPrefix = 'http://kongfanhu.iok.la/star-server/'
+var URLCommonPrefix = 'https://yisenhost.cn/star-server/'
 
 var URL = {
   // 获取通过微信code换取用户信息

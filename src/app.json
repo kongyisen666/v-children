@@ -4,7 +4,8 @@
     "pages/home/main",
     "pages/password/main",
     "pages/user/main",
-    "pages/index/main"
+    "pages/index/main",
+    "pages/error/main"
   ],
   "window": {
     "backgroundTextStyle": "light",
