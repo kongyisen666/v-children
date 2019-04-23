@@ -23,13 +23,13 @@
         <span style="position: absolute; top:27%; left: 23%;font-weight:500;font-size: 1rem;">每日</span>
       </div>
       <div style="clear:both"/>
-      <div @click="showOrClose(1)" style="position:relative;float:left;width: 4rem; height: 3rem;text-align:center">
+      <div @click="showOrClose(1)" style="position:relative;float:left;width: 4rem; height: 3rem;text-align:center;margin-top: 5%">
         <img src="/static/images/meizhou.png" mode="widthFix" class="xuanXiang">
         <span
           style="position: absolute; top:25%; left: 23%;font-weight:500;font-size: 1rem;">每周</span>
       </div>
       <div style="clear:both"/>
-      <div @click="showOrClose(2)" style="position:relative;float:left;width: 4rem; height: 3rem;text-align:center">
+      <div @click="showOrClose(2)" style="position:relative;float:left;width: 4rem; height: 3rem;text-align:center;margin-top: 5%">
         <img src="/static/images/meijian.png" mode="widthFix" class="xuanXiang">
         <span style="position: absolute; top:23%; left: 23%;font-size: 1rem;">每件</span>
       </div>
@@ -43,7 +43,7 @@
         </div>
       </van-popup>
     </div>
-    <div style="height: 50vh;width: 100vw;margin-top: -10%">
+    <div style="height: 50vh;width: 100vw;margin-top: -15%">
       <div style="width: 25%;height:20%;margin-left: 55%">
         <img src="/static/images/shuihu.jpg"
              mode="heightFix" style="height:100%;width: 100%;">
