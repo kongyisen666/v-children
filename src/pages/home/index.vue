@@ -4,11 +4,11 @@
       <div style="border-radius: 0 100px 100px 0;height: 2.5rem;width:6.5rem;background-color: #D7F1EE;float: left;">
         <span
           style="margin-left: 10%;color: #3B6929;line-height: 2.5rem;text-align: center;height: 2rem;"> {{score}}分</span>
-        <img v-if="children.sex==0"
-          style="margin-top: 2%;border-radius: 100px 100px 100px 100px;width: 2rem;height: 2rem;float: right;margin-right: 5%;margin-top: 4%"
-          src="/static/images/nan.jpg">
-        <img v-if="children.sex==1"
-             style="margin-top: 2%;border-radius: 100px 100px 100px 100px;width: 2rem;height: 2rem;float: right;margin-right: 5%;margin-top: 4%"
+        <img v-if="children.sex==0" mode="widthFix"
+             style="margin-top: 2%;border-radius: 100px 100px 100px 100px;width:32%;float: right;margin-right: 3%;margin-top: 3%"
+             src="/static/images/nan.jpg">
+        <img v-if="children.sex==1" mode="widthFix"
+             style="margin-top: 2%;border-radius: 100px 100px 100px 100px;width:32%;float: right;margin-right: 3%;margin-top: 3%"
              src="/static/images/nv.jpg">
       </div>
       <div
@@ -19,19 +19,19 @@
     <div>
       <div style="position:relative;float:left;width: 4rem; height: 3rem;text-align:center;margin-top: 5%"
            @click="showOrClose(0)">
-        <img src="/static/images/richang.png" style="width: 4rem; height: 3rem;">
-        <span style="position: absolute; top:0.8rem; left: 0.9rem;font-weight:500;font-size: 1rem;color: darkslategrey">每日</span>
+        <img src="/static/images/richang.png" mode="widthFix" class="xuanXiang">
+        <span style="position: absolute; top:27%; left: 23%;font-weight:500;font-size: 1rem;">每日</span>
       </div>
       <div style="clear:both"/>
       <div @click="showOrClose(1)" style="position:relative;float:left;width: 4rem; height: 3rem;text-align:center">
-        <img src="/static/images/meizhou.png" style="width: 4.2rem; height: 3.2rem;">
+        <img src="/static/images/meizhou.png" mode="widthFix" class="xuanXiang">
         <span
-          style="position: absolute; top:0.9rem; left: 1rem;font-weight:500;font-size: 1rem;color: darkslategrey">每周</span>
+          style="position: absolute; top:25%; left: 23%;font-weight:500;font-size: 1rem;">每周</span>
       </div>
       <div style="clear:both"/>
       <div @click="showOrClose(2)" style="position:relative;float:left;width: 4rem; height: 3rem;text-align:center">
-        <img src="/static/images/meijian.png" style="width: 4rem; height: 3rem;">
-        <span style="position: absolute; top:0.8rem; left: 0.9rem;font-weight:500;font-size: 1rem;color: darkslategrey">每件</span>
+        <img src="/static/images/meijian.png" mode="widthFix" class="xuanXiang">
+        <span style="position: absolute; top:23%; left: 23%;font-size: 1rem;">每件</span>
       </div>
       <van-popup :show="show" @close="show = false">
         <div class="popup">
@@ -42,37 +42,39 @@
           </span>
         </div>
       </van-popup>
-      <div><img src="/static/images/shuihu.jpg"
-                style="width: 6rem;margin-top:-20%;height: 6rem;float: right;margin-right: 25%"></div>
-      <div style="clear:both"/>
-      <div style="position:relative;float:right;margin-right: 50%;margin-top:-5%;text-align:center;">
-        <img src="/static/images/shuidi.jpg" style="width: 1.2rem;height: 2rem">
+    </div>
+    <div style="height: 50vh;width: 100vw;margin-top: -10%">
+      <div style="width: 25%;height:20%;margin-left: 55%">
+        <img src="/static/images/shuihu.jpg"
+             mode="heightFix" style="height:100%;width: 100%;">
+      </div>
+      <div class="shuiDiDiv" style="margin-left: 50%;">
+        <img src="/static/images/shuidi.jpg"  mode="heightFix" class="shuidi">
         <span
-          style="position: absolute; top:0.7rem; left: 0rem;font-weight:500;font-size: 0.9rem;color: darkslategrey">{{shui1}}</span>
+          style="position: absolute;top:20%;left:-3%;font-weight:500;font-size: 0.9rem;">{{shui1}}</span>
+      </div>
+      <div class="shuiDiDiv" style="margin-left: 45%;">
+        <img src="/static/images/shuidi.jpg"  mode="heightFix" class="shuidi">
+        <span
+          style="position: absolute;top:20%;left:-3%;font-weight:500;font-size: 0.9rem;">{{shui2}}</span>
+      </div>
+      <div class="shuiDiDiv" style="margin-left: 50%;">
+        <img src="/static/images/shuidi.jpg"  mode="heightFix" class="shuidi">
+        <span
+          style="position: absolute;top:20%;left:-3%;font-weight:500;font-size: 0.9rem;">{{shui3}}</span>
       </div>
       <div style="clear:both"/>
-      <div style="position:relative;float:right;margin-right: 55%;text-align:center">
-        <img src="/static/images/shuidi.jpg" style="width: 1.2rem;height: 2rem">
-        <span
-          style="position: absolute; top:0.7rem; left: 0rem;font-weight:500;font-size: 0.9rem;color: darkslategrey">{{shui2}}</span>
-      </div>
-      <div style="clear:both"/>
-      <div style="position:relative;float:right;margin-right: 49%;text-align:center">
-        <img src="/static/images/shuidi.jpg" style="width: 1.2rem;height: 2rem">
-        <span
-          style="position: absolute; top:0.7rem; left: 0rem;font-weight:500;font-size: 0.9rem;color: darkslategrey">{{shui3}}</span>
-      </div>
-      <div style="clear:both"/>
-      <div style="position:relative;float:right;text-align:center;margin-right: 15%">
-        <img src="/static/images/shu.jpg" style="width: 9rem;height: 6rem;">
-        <img @click="luckDraw" src="/static/images/choujiang.jpg" style="width: 3rem;height: 3rem;">
+      <div style="position:relative;height: 50%;margin-left: 13%;margin-top: 3%;">
+        <img src="/static/images/shu.jpg" mode="heightFix" style="width: 50%;height: 100%;margin-left: 20%;">
+        <img @click="luckDraw" src="/static/images/choujiang.jpg" mode="heightFix" style="width: 20%;height: 40%;">
       </div>
     </div>
     <div style="border-radius: 1rem 1rem 0 0;position:fixed;bottom:0;height: 15%;width: 100%;background-color: #d2eced">
       <div style="margin-left: 3%;margin-top: 1.5%">积分动态</div>
       <div style="margin-top: 1.5%;background-color: white;width: 90%;height: 50%;margin-left: 5%;">
-        <img src="/static/images/shuidi1.jpg" style="margin-left: 3%;width: 2.3rem;height: 2.3rem;float: left;">
-        <div style="float: left;margin-left: 4%;line-height: 2.5rem;height: 2.5rem">{{logMsg}}</div>
+        <img src="/static/images/shuidi1.jpg" mode="heightFix"
+             style="margin-left: 3%;width:14%;height: 95%;float: left;">
+        <div style="float: left;margin-top:4%;margin-left:5%">{{logMsg}}</div>
       </div>
     </div>
   </div>
@@ -197,6 +199,23 @@
     height: 100%;
     background-color: #A2DAD7;
     position: fixed;
+  }
+
+  .shuiDiDiv{
+    margin-top: 3%;
+    position:relative;
+    height:8%;
+    width:6%;
+    margin-right: 15%;
+  }
+
+  .shuidi {
+    width: 100%;
+    height: 100%;
+  }
+
+  .xuanXiang {
+    width: 100%;
   }
 
   .popup {
