@@ -13,19 +13,45 @@
       }
     },
     onLoad () {
-      this.errorMsg = this.getQuery().errorMsg
+      this.errorMsg = this.$urlData().errorMsg
     },
     methods: {
-      getQuery: function () {
-        /* 获取当前路由栈数组 */
-        const pages = getCurrentPages()
-        const currentPage = pages[pages.length - 1]
-        const options = currentPage.options
-        return options
-      },
       login () {
-        wx.navigateTo({
-          url: '/pages/login/main'
+        wx.showLoading({
+          title: '加载中' // 数据请求前loading
+        })
+        var url = 'https://yisenhost.cn/star-server/login/get_user'
+        wx.login({// 获取code
+          success: function (res) {
+            var code = res.code // 返回code
+            wx.request({
+              url: url,
+              data: {code: code},
+              header: {'content-type': 'json'},
+              success: function (res) {
+                if (res.statusCode === 200) {
+                  var user = res.data.object.object
+                  wx.setStorageSync('sessionid', res.header['Set-Cookie'])
+                  wx.setStorageSync('user', res.data.object.object)
+                  if (user.state == 1 && user.type == 1) {
+                    wx.redirectTo({
+                      url: '/pages/password/main'
+                    })
+                    return
+                  }
+                  wx.redirectTo({
+                    url: '/pages/index/main'
+                  })
+                } else {
+                  this.errorMsg = '服务器错误请求失败'
+                  wx.hideLoading()
+                }
+              }, fail (err) {
+                this.errorMsg = '请求超时请稍后再试'
+                wx.hideLoading()
+              }
+            })
+          }
         })
       }
     }

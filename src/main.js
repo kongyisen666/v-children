@@ -7,6 +7,14 @@ const app = new Vue(App)
 app.$mount()
 Vue.prototype.$url = URL.URL
 
+Vue.prototype.$urlData = function () {
+  /* 获取当前路由栈数组 */
+  const pages = getCurrentPages()
+  const currentPage = pages[pages.length - 1]
+  const options = currentPage.options
+  return options
+}
+
 let urlPath = URL.URLCommonPrefix // 项目的域名
 Vue.prototype.$post = function (url, data) { // post请求
   wx.showLoading({
