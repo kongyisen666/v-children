@@ -1,7 +1,7 @@
 <template>
   <div class="beijing">
     <div style="color: red;text-align: center;margin-top: 40%">{{errorMsg}}</div>
-      <div style="text-align: center;margin-top: 10%" @click="login">重新尝试登陆</div>
+    <div style="text-align: center;margin-top: 10%" @click="login">重新尝试登陆</div>
   </div>
 </template>
 
@@ -20,7 +20,7 @@
         wx.showLoading({
           title: '加载中' // 数据请求前loading
         })
-        var url = 'https://yisenhost.cn/star-server/login/get_user'
+        var url = this.URLCommonPrefix + this.$url.login_get_user
         wx.login({// 获取code
           success: function (res) {
             var code = res.code // 返回code
@@ -47,7 +47,6 @@
                   wx.hideLoading()
                 }
               }, fail (err) {
-                this.errorMsg = '请求超时请稍后再试'
                 wx.hideLoading()
               }
             })
