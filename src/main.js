@@ -6,6 +6,7 @@ App.mpType = 'app'
 const app = new Vue(App)
 app.$mount()
 Vue.prototype.$url = URL.URL
+Vue.prototype.$URL = URL
 
 Vue.prototype.$urlData = function () {
   /* 获取当前路由栈数组 */

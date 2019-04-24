@@ -20,7 +20,7 @@
         wx.showLoading({
           title: '加载中' // 数据请求前loading
         })
-        var url = this.URLCommonPrefix + this.$url.login_get_user
+        var url = this.$URL.URLCommonPrefix + this.$url.login_get_user
         wx.login({// 获取code
           success: function (res) {
             var code = res.code // 返回code
