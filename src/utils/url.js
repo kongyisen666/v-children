@@ -8,7 +8,9 @@ var URL = {
   login_home: 'login/home',
   reward_punish_search_by_type: 'reward_punish/search_by_type',
   score_log_search_by_children_id: 'score_log/search_by_children_id',
-  login_get_user: 'login/get_user'
+  login_get_user: 'login/get_user',
+  user_list: 'user/search_list',
+  user_activation: 'user/activation'
 }
 
 export default {

@@ -7,16 +7,16 @@
 
 <script>
   export default {
-    data () {
+    data() {
       return {
         errorMsg: ''
       }
     },
-    onLoad () {
+    onLoad() {
       this.errorMsg = this.$urlData().errorMsg
     },
     methods: {
-      login () {
+      login() {
         wx.showLoading({
           title: '加载中' // 数据请求前loading
         })
@@ -46,7 +46,7 @@
                   this.errorMsg = '服务器错误请求失败'
                   wx.hideLoading()
                 }
-              }, fail (err) {
+              }, fail(err) {
                 wx.hideLoading()
               }
             })

@@ -1,6 +1,7 @@
 {
   "pages": [
     "pages/login/main",
+    "pages/userList/main",
     "pages/home/main",
     "pages/password/main",
     "pages/user/main",
@@ -22,6 +23,8 @@
     "van-radio": "/static/vant/radio/index",
     "van-checkbox-group": "/static/vant/checkbox-group/index",
     "van-datetime-picker": "/static/vant/checkbox-group/index",
-    "van-popup": "/static/vant/popup/index"
+    "van-popup": "/static/vant/popup/index",
+    "van-switch-cell": "/static/vant/switch-cell/index",
+    "van-action-sheet": "/static/vant/action-sheet/index"
   }
 }

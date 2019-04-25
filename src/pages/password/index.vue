@@ -20,6 +20,7 @@
   export default {
     data() {
       return {
+        user : wx.getStorageSync("user"),
         length:4,    //输入框个数
         isFocus:false,  //聚焦
         value:"",    //输入的内容
@@ -40,6 +41,13 @@
       submit(){
         this.$post(this.$url.login_home, {password:this.value}).then(res => {
           if(res.data.success){
+            if (this.user.role == 1) {
+              wx.redirectTo({
+                url: '/pages/userList/main'
+              })
+              return
+            }
+
             wx.redirectTo({
               url: '/pages/home/main'
             })

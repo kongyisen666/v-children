@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    data () {
+    data() {
       return {
         url: ''
       }
@@ -43,7 +43,7 @@
                   url: '/pages/error/main?errorMsg=' + res.message
                 })
               }
-            }, fail (err) {
+            }, fail(err) {
               err.message = '请求超时请稍后再试'
               wx.redirectTo({
                 url: '/pages/error/main?errorMsg=' + err.message
