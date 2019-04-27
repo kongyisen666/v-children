@@ -1,7 +1,7 @@
 <template>
   <div class=".beijing">
     <div class="background-img">
-      <image  class="img" src="/static/images/beijing.jpg"></image>
+      <image  class="img" src="/static/images/beijing.png"></image>
     </div>
      <view class='content'>
       <span v-for="item in length ">
@@ -41,13 +41,14 @@
       submit(){
         this.$post(this.$url.login_home, {password:this.value}).then(res => {
           if(res.data.success){
-            if (this.user.role == 1) {
+            var user = wx.getStorageSync("user")
+            console.log(user)
+            if (user.role == 1) {
               wx.redirectTo({
                 url: '/pages/userList/main'
               })
               return
             }
-
             wx.redirectTo({
               url: '/pages/home/main'
             })

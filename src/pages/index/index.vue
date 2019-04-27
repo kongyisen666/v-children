@@ -1,7 +1,7 @@
 <template>
   <div class="beijing">
     <div class="background-img">
-      <image  class="img" src="/static/images/beijing.jpg"></image>
+      <image  class="img" src="/static/images/beijing.png"></image>
     </div>
     <div >
       <session v-if="user.type == 1">

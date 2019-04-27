@@ -16,9 +16,12 @@
     </div>
     <div style="height: 11vw;"></div>
     <div style="position:fixed;bottom:0;width: 100%;z-index: 1">
-      <button class="butten" type="default" @click="activeType(0,1)">全部</button>
-      <button class="butten" type="default" @click="activeType(0,0)">未激活</button>
-      <button class="butten" type="default" @click="activeType(1,1)">已激活活</button>
+      <button class="butten" :style="{'background-color':button1_color}" type="default" @click="activeType(1)">全部
+      </button>
+      <button class="butten" :style="{'background-color':button2_color}" type="default" @click="activeType(2)">未激活
+      </button>
+      <button class="butten" :style="{'background-color':button3_color}" type="default" @click="activeType(3)">已激活
+      </button>
     </div>
   </div>
 </template>
@@ -26,19 +29,24 @@
 <script>
 
   export default {
-    data() {
+    data () {
       return {
         users: {},
         checked: true,
         active: 0,
         active1: 1,
+        button1_color: '#1989fa',
+        button2_color: '#fff',
+        button3_color: '#fff',
+        button_color1: '#1989fa',
+        button_color2: '#fff'
       }
     },
-    onLoad() {
-      this.selectList();
+    onLoad () {
+      this.selectList()
     },
     methods: {
-      selectList() {
+      selectList () {
         this.$post(this.$url.user_list, {}).then(res => {
           if (res.data.success) {
             console.log(res.data.object.object)
@@ -46,7 +54,7 @@
           }
         })
       },
-      onChange(user) {
+      onChange (user) {
         var state = 0
         if (user.state == 0) {
           state = 1
@@ -61,15 +69,34 @@
           }
         })
       },
-      onClose() {
-        this.setData({show: false});
+      onClose () {
+        this.setData({show: false})
       },
-      onSelect(event) {
-        console.log(event.detail);
+      onSelect (event) {
+        console.log(event.detail)
       },
-      activeType(num, num1) {
-        this.active = num
-        this.active1 = num1
+      activeType (buttenNum) {
+        if (buttenNum === 1) {
+          this.active = 0
+          this.active1 = 1
+          this.button1_color = this.button_color1
+          this.button2_color = this.button_color2
+          this.button3_color = this.button_color2
+        }
+        if (buttenNum === 2) {
+          this.active = 0
+          this.active1 = 0
+          this.button1_color = this.button_color2
+          this.button2_color = this.button_color1
+          this.button3_color = this.button_color2
+        }
+        if (buttenNum === 3) {
+          this.active = 1
+          this.active1 = 1
+          this.button1_color = this.button_color2
+          this.button2_color = this.button_color2
+          this.button3_color = this.button_color1
+        }
       }
     }
   }
