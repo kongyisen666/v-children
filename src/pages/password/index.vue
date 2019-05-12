@@ -28,7 +28,6 @@
       }
     },
     onLoad(){
-      this.Tap()
     },
     methods: {
       setPassword(event){

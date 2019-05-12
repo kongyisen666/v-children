@@ -39,7 +39,8 @@
         button2_color: '#fff',
         button3_color: '#fff',
         button_color1: '#1989fa',
-        button_color2: '#fff'
+        button_color2: '#fff',
+        enablePullDownRefresh:true
       }
     },
     onLoad () {
@@ -49,7 +50,6 @@
       selectList () {
         this.$post(this.$url.user_list, {}).then(res => {
           if (res.data.success) {
-            console.log(res.data.object.object)
             this.users = res.data.object.object
           }
         })
@@ -71,9 +71,6 @@
       },
       onClose () {
         this.setData({show: false})
-      },
-      onSelect (event) {
-        console.log(event.detail)
       },
       activeType (buttenNum) {
         if (buttenNum === 1) {
@@ -97,7 +94,16 @@
           this.button2_color = this.button_color2
           this.button3_color = this.button_color1
         }
+      },
+      async getList () {
+        wx.showNavigationBarLoading()
+        await this.selectList()
+        wx.stopPullDownRefresh()
+        wx.hideNavigationBarLoading()
       }
+    },
+    onPullDownRefresh () {
+      this.getList()
     }
   }
 </script>
