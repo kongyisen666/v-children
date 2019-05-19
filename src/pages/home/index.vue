@@ -1,5 +1,5 @@
 <template xmlns:wx="http://www.w3.org/1999/xhtml">
-  <div class=".beijing">
+  <div class="beijing">
     <div style="width: 100%;float: right;margin-top: 10%">
       <div style="border-radius: 0 100px 100px 0;height: 2.5rem;width:6.5rem;background-color: #D7F1EE;float: left;">
         <span
@@ -176,7 +176,9 @@
         this.scoreLog[0].score = score
       },
       luckDraw() {
-        this.$alert('该功能暂未上线尽情期待')
+        wx.navigateTo({
+          url: '/pages/luckDraw/main?childrenId='+this.children.id
+        })
       }
     }
   }

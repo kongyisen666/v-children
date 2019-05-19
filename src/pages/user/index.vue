@@ -167,6 +167,7 @@
           if (res.data.success) {
             wx.showModal({
               title: '操作完成，请等待管理员审核,通过审核后可进入操作页面',
+              showCancel: false,
               success: function (res) {
                 if (res.confirm) {
                   wx.redirectTo({

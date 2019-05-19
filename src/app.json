@@ -1,7 +1,9 @@
 {
   "pages": [
-    "pages/home/main",
     "pages/login/main",
+    "pages/setPrize/main",
+    "pages/luckDraw/main",
+    "pages/home/main",
     "pages/userList/main",
     "pages/password/main",
     "pages/user/main",

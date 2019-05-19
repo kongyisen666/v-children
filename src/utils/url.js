@@ -10,7 +10,10 @@ var URL = {
   score_log_search_by_children_id: 'score_log/search_by_children_id',
   login_get_user: 'login/get_user',
   user_list: 'user/search_list',
-  user_activation: 'user/activation'
+  user_activation: 'user/activation',
+  prize_search: 'prize/search',
+  prize_set_prize: 'prize/set_prize',
+  prize_log_add: 'prize_log/add'
 }
 
 export default {
