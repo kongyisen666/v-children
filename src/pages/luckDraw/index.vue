@@ -37,8 +37,16 @@
         isRunning: false,//是否正在抽奖
         imageAward: [],//奖品图片数组
         priceAttribute:'prize',
-        //循环体
-        timerCircle:''
+        //循环体圆点闪烁
+        timerCircle:'',
+        //循环体转盘
+        timer:'',
+        //循环体旋转速度
+        timer_t:90,
+        //for循环变量
+        i:0,
+        isInToo : true,
+        isInToo1 : true
       }
     },
     onLoad() {
@@ -131,30 +139,42 @@
           return
         }
         this.isRunning = true
-        var i = 0;
-        var timer = setInterval(() => {
-          this.indexSelect++;
-          //这里我只是简单粗暴用y=30*x+200函数做的处理.可根据自己的需求改变转盘速度
-          i += Math.floor(Math.random() * 100);
-          if (i > 1000) {
-            //去除循环
-            clearInterval(timer)
-            //获奖提示
-            wx.showModal({
-              title: '恭喜您',
-              content: '获得了“' + (this.imageAward[this.indexSelect % 8]) + "”奖励",
-              showCancel: false,//去掉取消按钮
-              success: res => {
-                if (res.confirm) {
-                  this.isRunning = false
-                  this.$post(this.$url.prize_log_add, {childrenId: this.childrenId,msg:this.imageAward[this.indexSelect % 8]}).then(res => {
-                  })
-                }
+        this.timer = setInterval(this.game, this.timer_t);
+      },
+      game(){
+        this.indexSelect++;
+        this.i += Math.floor(Math.random() * 100);
+        if(this.i>1000 && this.isInToo){
+          clearInterval(this.timer);
+          this.timer = setInterval(this.game, this.timer_t+100);
+          this.isInToo = false;
+        }
+        if(this.i>1700 && this.isInToo1){
+          clearInterval(this.timer);
+          this.timer = setInterval(this.game, this.timer_t+500);
+          this.isInToo1 = false;
+        }
+        if (this.i > 2000) {
+          //去除循环
+          clearInterval(this.timer)
+          this.i=0
+          this.isInToo = true
+          this.isInToo1 = true
+          //获奖提示
+          wx.showModal({
+            title: '恭喜您',
+            content: '获得了“' + (this.imageAward[this.indexSelect % 8]) + "”奖励",
+            showCancel: false,//去掉取消按钮
+            success: res => {
+              if (res.confirm) {
+                this.isRunning = false
+                this.$post(this.$url.prize_log_add, {childrenId: this.childrenId,msg:this.imageAward[this.indexSelect % 8]}).then(res => {
+                })
               }
-            })
-          }
-          this.indexSelect = this.indexSelect % 8;
-        }, 90)
+            }
+          })
+        }
+        this.indexSelect = this.indexSelect % 8;
       },
       setPrize() {
         clearInterval(this.timerCircle)

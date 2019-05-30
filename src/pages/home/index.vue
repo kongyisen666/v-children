@@ -46,10 +46,10 @@
       </van-popup>
     </div>
     <div style="height: 50vh;width: 100vw;margin-top: -15%">
-      <!--<div style="width: 25%;height:20%;margin-left: 55%">-->
-      <!--<img src="/static/images/shuihu.jpg"-->
-      <!--mode="heightFix" style="height:100%;width: 100%;">-->
-      <!--</div>-->
+      <div style="width: 25%;height:20%;margin-left: 55%">
+      <img src="/static/images/shuihu.jpg" :animation="musicAnimation"
+      mode="heightFix" style="height:100%;width: 100%;">
+      </div>
       <!--<div class="shuiDiDiv" style="margin-left: 50%;">-->
       <!--<img src="/static/images/shuidi.jpg"  mode="heightFix" class="shuidi">-->
       <!--<span-->
@@ -94,7 +94,8 @@
         rewardPunish: {},
         rewardPunish0: {},
         rewardPunish1: {},
-        rewardPunish2: {}
+        rewardPunish2: {},
+        musicAnimation:null
       }
     },
     mounted() {
@@ -104,8 +105,44 @@
       this.searchRewardPunishByType(0)
       this.searchRewardPunishByType(1)
       this.searchRewardPunishByType(2)
+      this.cartoon();
     },
     methods: {
+      cartoon(){
+        var rotateCount = 1;
+
+        const animationDuration = 3000;
+
+        const animation = wx.createAnimation({
+
+          duration: animationDuration
+
+        });
+
+        animation.rotate(360).step();
+
+        this.musicAnimation = animation.export();
+
+        //连续动画关键步骤
+
+        var _this = this;
+
+        setInterval(function () {
+
+          rotateCount++;
+
+          const animation = wx.createAnimation({
+
+            duration: animationDuration
+
+          });
+
+          animation.rotate(360*rotateCount).step();
+
+          _this.musicAnimation = animation.export();
+
+        }, animationDuration)
+      },
       showOrClose(type) {
         if (0 == type) {
           this.rewardPunish = this.rewardPunish0
