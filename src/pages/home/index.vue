@@ -1,4 +1,3 @@
-<template xmlns:wx="http://www.w3.org/1999/xhtml">
   <div class="beijing">
     <div style="width: 100%;float: right;margin-top: 10%">
       <div style="border-radius: 0 100px 100px 0;height: 2.5rem;width:6.5rem;background-color: #D7F1EE;float: left;">
@@ -38,7 +37,7 @@
       <van-popup :show="show" @close="show = false">
         <div class="popup">
           <div style="text-align: center;background-color: chocolate">{{score}}分</div>
-          <span v-for="item in rewardPunish" wx:key="property">
+          <span v-for="item in rewardPunish" wx:key="item">
             <van-button round type="danger"
                         @click="addScore(item.score,item.msg)">{{item.msg}}+{{item.score}}分</van-button>
           </span>
@@ -48,13 +47,13 @@
     <div style="height: 50vh;width: 100vw;margin-top: -15%">
       <div style="width: 25%;height:20%;margin-left: 55%">
       <img src="/static/images/shuihu.jpg" :animation="musicAnimation"
-      mode="widthFix" :style="{height:'100%',width: '100%','transforMrotate':(-180)}">
+           mode="widthFix" :style="{height:'100%',width: '100%',opacity:0}">
       </div>
-      <!--<div class="shuiDiDiv" style="margin-left: 50%;">-->
-      <!--<img src="/static/images/shuidi.jpg"  mode="heightFix" class="shuidi">-->
-      <!--<span-->
-      <!--style="position: absolute;top:20%;left:-3%;font-weight:500;font-size: 0.9rem;">{{shui1}}</span>-->
-      <!--</div>-->
+      <div class="shuiDiDiv" style="margin-left: 50%;">
+      <img src="/static/images/shuidi.jpg" :style="{opacity:shuiDiOpacity}" :animation="musicAnimationShuiDi" mode="heightFix" class="shuidi">
+      <span
+      style="position: absolute;top:20%;left:-3%;font-weight:500;font-size: 0.9rem;">{{shui1}}</span>
+      </div>
       <!--<div class="shuiDiDiv" style="margin-left: 45%;">-->
       <!--<img src="/static/images/shuidi.jpg"  mode="heightFix" class="shuidi">-->
       <!--<span-->
@@ -91,14 +90,18 @@
         show: false,
         scoreLog: {},
         logMsg: '暂无数据',
-        rewardPunish: {},
+        rewardPunish: [],
         rewardPunish0: {},
         rewardPunish1: {},
         rewardPunish2: {},
-        musicAnimation:null
+        musicAnimation:null,
+        musicAnimationShuiDi:null,
+        display:'none',
+        animation:'',
+        animationShuiDi:'',
+        next:true,
+        shuiDiOpacity:0
       }
-    },
-    mounted() {
     },
     onLoad() {
       this.getChildren()
@@ -108,39 +111,48 @@
     },
     methods: {
       cartoon(){
-        var rotateCount = 1;
-
         const animationDuration = 1000;
-
-        const animation = wx.createAnimation({
-
+        this.animation = wx.createAnimation({
           duration: animationDuration
-
         });
-
-        animation.rotate(-30).step().rotate(30).step();
-
-        this.musicAnimation = animation.export();
-
         //连续动画关键步骤
-
-        // var _this = this;
-        //
-        // setInterval(function () {
-        //
-        //   rotateCount++;
-        //
-        //   const animation = wx.createAnimation({
-        //
-        //     duration: animationDuration
-        //
-        //   });
-        //
-        //   animation.rotate(360*rotateCount).step();
-        //
-        //   _this.musicAnimation = animation.export();
-        //
-        // }, animationDuration)
+        this.animation.opacity(1).rotate(-30).step().rotate(30).opacity(0).step();
+        this.musicAnimation = this.animation.export();
+        var times = 2;
+        var interval = '';
+        interval = setInterval(() =>{
+          times--;
+          if(times == 1){
+            console.log('11')
+            this.cartoonShuiDi()
+          }
+          if(times < 0){
+            clearInterval(interval)
+            this.musicAnimation= null;
+            times = 4
+          }
+        },1000)
+      },
+      cartoonShuiDi(){
+        this.shuiDiOpacity = 1;
+        const animationDuration = 1000;
+        this.animationShuiDi = wx.createAnimation({
+          duration: animationDuration
+        });
+        this.animationShuiDi.translateY(40).step().translateY(-40).step();
+        this.musicAnimationShuiDi = this.animationShuiDi.export();
+        var times = 1;
+        var interval = '';
+        interval = setInterval(() =>{
+          times--;
+          if(times == 0){
+            this.shuiDiOpacity = 0;
+          }
+          if(times < 0){
+            clearInterval(interval)
+            this.musicAnimationShuiDi= null;
+          }
+        },1000)
       },
       showOrClose(type) {
         if (0 == type) {
