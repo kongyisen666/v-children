@@ -1,3 +1,4 @@
+<template xmlns:wx="http://www.w3.org/1999/xhtml">
   <div class="beijing">
     <div style="width: 100%;float: right;margin-top: 10%">
       <div style="border-radius: 0 100px 100px 0;height: 2.5rem;width:6.5rem;background-color: #D7F1EE;float: left;">
@@ -47,12 +48,10 @@
     <div style="height: 50vh;width: 100vw;margin-top: -15%">
       <div style="width: 25%;height:20%;margin-left: 55%">
       <img src="/static/images/shuihu.jpg" :animation="musicAnimation"
-           mode="widthFix" :style="{height:'100%',width: '100%',opacity:0}">
+           mode="widthFix" :style="{height:'100%',width: '100%',opacity:0,marginTop:'-50%'}">
       </div>
-      <div class="shuiDiDiv" style="margin-left: 50%;">
-      <img src="/static/images/shuidi.jpg" :style="{opacity:shuiDiOpacity}" :animation="musicAnimationShuiDi" mode="heightFix" class="shuidi">
-      <span
-      style="position: absolute;top:20%;left:-3%;font-weight:500;font-size: 0.9rem;">{{shui1}}</span>
+      <div class="shuiDiDiv" style="margin-left: 50%;margin-top: -5%">
+      <img src="/static/images/shuidi.jpg" :style="{opacity:shuiDiOpacity}" :animation="musicAnimationShuiDi" mode="widthFix" class="shuidi">
       </div>
       <!--<div class="shuiDiDiv" style="margin-left: 45%;">-->
       <!--<img src="/static/images/shuidi.jpg"  mode="heightFix" class="shuidi">-->
@@ -100,7 +99,8 @@
         animation:'',
         animationShuiDi:'',
         next:true,
-        shuiDiOpacity:0
+        shuiDiOpacity:0,
+        nextShuiDi:true
       }
     },
     onLoad() {
@@ -134,12 +134,17 @@
         },1000)
       },
       cartoonShuiDi(){
+        if(this.nextShuiDi){
+          this.nextShuiDi = !this.nextShuiDi;
+        }else{
+          return;
+        }
         this.shuiDiOpacity = 1;
         const animationDuration = 1000;
         this.animationShuiDi = wx.createAnimation({
           duration: animationDuration
         });
-        this.animationShuiDi.translateY(40).step().translateY(-40).step();
+        this.animationShuiDi.translateY(70).step().translateY(-15).step();
         this.musicAnimationShuiDi = this.animationShuiDi.export();
         var times = 1;
         var interval = '';
@@ -151,6 +156,7 @@
           if(times < 0){
             clearInterval(interval)
             this.musicAnimationShuiDi= null;
+            this.nextShuiDi = !this.nextShuiDi;
           }
         },1000)
       },
@@ -245,7 +251,7 @@
     margin-top: 3%;
     position: relative;
     height: 8%;
-    width: 6%;
+    width: 5%;
     margin-right: 15%;
   }
 

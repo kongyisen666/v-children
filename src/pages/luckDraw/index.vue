@@ -119,12 +119,12 @@
             }else{
               this.imageAward[0]=object.prize1
               this.imageAward[1]=object.prize2
-              this.imageAward[3]=object.prize3
-              this.imageAward[4]=object.prize4
-              this.imageAward[5]=object.prize5
-              this.imageAward[6]=object.prize6
-              this.imageAward[7]=object.prize7
-              this.imageAward[8]=object.prize8
+              this.imageAward[2]=object.prize3
+              this.imageAward[3]=object.prize4
+              this.imageAward[4]=object.prize5
+              this.imageAward[5]=object.prize6
+              this.imageAward[6]=object.prize7
+              this.imageAward[7]=object.prize8
             }
             this.setPrizeUi();
             this.onePage=false
