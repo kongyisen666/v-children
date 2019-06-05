@@ -7,11 +7,12 @@
       @select="onSelect"
     />
     <div v-for="(item,index) in users">
-      <div v-if="item.state == active || item.state == active1" style="border-bottom:1px solid #f5f5f5">
-        <van-switch-cell :title="item.childrenList[0].name"
-                         :checked="item.state==1?true:false"
-                         @change="onChange(item)"
-        />
+      <div v-if="item.state == active || item.state == active1"  style="text-align: center;margin-top: 3%">
+        <van-row gutter="20">
+          <van-col span="8">{{item.childrenList[0].name}}</van-col>
+          <van-col span="8">{{item.childrenList[0].score}}</van-col>
+          <van-col span="8"><van-switch size="25px" :checked="item.state==1?true:false" @change="onChange(item)" /></van-col>
+        </van-row>
       </div>
     </div>
     <div style="height: 11vw;"></div>

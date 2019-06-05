@@ -1,11 +1,10 @@
 {
   "pages": [
-
     "pages/login/main",
+    "pages/userList/main",
     "pages/home/main",
     "pages/setPrize/main",
     "pages/luckDraw/main",
-    "pages/userList/main",
     "pages/password/main",
     "pages/user/main",
     "pages/index/main",
@@ -28,6 +27,9 @@
     "van-datetime-picker": "/static/vant/checkbox-group/index",
     "van-popup": "/static/vant/popup/index",
     "van-switch-cell": "/static/vant/switch-cell/index",
-    "van-action-sheet": "/static/vant/action-sheet/index"
+    "van-switch": "/static/vant/switch/index",
+    "van-action-sheet": "/static/vant/action-sheet/index",
+    "van-col": "/static/vant/col/index",
+    "van-row": "/static/vant/row/index"
   }
 }
